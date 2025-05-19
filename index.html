@@ -68,7 +68,7 @@ const questions = [
   { "clue": "idara meele kuutikoLLuthivi", "answer": "kurci" },
   { "clue": "idara mele bariyuttivi", "answer": "kaagada" },
   { "clue": "ii deha bhaagadinda nooDuttivi", "answer": "kannu" },
-  { "clue": "ii deha bhaagadinda usiraaDuttivi", "answer": "mooku" },
+  { "clue": "ii deha bhaagadinda usiraaDuttivi", "answer": "muugu" },
   { "clue": "ii deha bhaagadinda keLiskotivi", "answer": "kivi" },
   { "clue": "ii deha bhaagadinda nadiyuttivi", "answer": "kaalu" },
   { "clue": "ii deha bhaagadinda vastu galannu hidiyuttivi", "answer": "kai" },
@@ -98,7 +98,7 @@ function showQuestion() {
 }
 
 function checkAnswer() {
-  const input = document.getElementById("userInput").value.trim().toLowerCase();
+  const input = document.getElementById("userInput").value.trim();
   const feedback = document.getElementById("feedback");
   if (input === questions[current].answer) {
     feedback.innerText = "✔️ Correct!";
