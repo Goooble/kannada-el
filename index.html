@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kannada Word Guessing Game</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #fefbd8;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 10px #ccc;
+      max-width: 600px;
+      margin: auto;
+    }
+    input {
+      font-size: 1.4rem;
+      padding: 10px;
+      width: 70%;
+    }
+    button {
+      font-size: 1rem;
+      padding: 10px 15px;
+      margin-top: 10px;
+    }
+    #feedback {
+      margin-top: 15px;
+      font-size: 1.2rem;
+    }
+    #scoreDisplay {
+      font-size: 1rem;
+      margin-top: 15px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Guess the Kannada Word</h2>
+  <p id="clue">Loading...</p>
+  <input type="text" id="userInput" placeholder="Type your answer here">
+  <br />
+  <button onclick="checkAnswer()">Check</button>
+  <button onclick="nextQuestion()">Next</button>
+  <div id="feedback"></div>
+  <div id="scoreDisplay"></div>
+</div>
+
+<script>
+const questions = [
+  { clue: "ii haNNu kempu baNNadalli iruttade mattu jana adannu tintare", answer: "sebu" },
+  { clue: "idu neerannu thumbi noDabahudada patre", answer: "loTa" },
+  { clue: "idu beligge baruva hakki, eccarisalikke kuuguttade", answer: "koLi" },
+  { clue: "shaaleli idannu oodalu hogabeku", answer: "pustaka" },
+  { clue: "idu maLe baruva samayadalli upayogisuva vastu", answer: "chatri" },
+  { clue: "idu ondu vanara prani", answer: "kooti" },
+  { clue: "idu namma mane kaayuva praNi", answer: "naayi" },               
+  { clue: "ii pakshi madhura haaduttade mattu chikka agide", answer: "kokila" },
+  { clue: "idu school ge hogalu nimage beku", answer: "bag" },
+  { clue: "BeLige swalpa hotteya meele idannu kudiyuttare", answer: "kaapi" },
+  { clue: "ii vasthu nimage samaya tiLisuttade", answer: "ghaDiyaara" },
+  { "clue": "idara meele kuutikoLLuthivi", "answer": "kurci" },
+  { "clue": "idara mele bariyuttivi", "answer": "kaagada" },
+  { "clue": "ii deha bhaagadinda nooduttivi", "answer": "kannu" },
+  { "clue": "ii deha bhaagadinda usiraaduttivi", "answer": "mooku" },
+  { "clue": "ii deha bhaagadinda keLiskotivi", "answer": "kivi" },
+  { "clue": "ii deha bhaagadinda nadiyuttivi", "answer": "kaalu" },
+  { "clue": "ii deha bhaagadinda vastu galannu hidiyuttivi", "answer": "kai" },
+  { "clue": "ii deha bhaagadinda tinnutivi", "answer": "baayi" },
+  { "clue": "kaalige haaki koLLuvudu", "answer": "chappli" },
+  { "clue": "tarakariyannu kattirasalu baLsuvudu", "answer": "chaaku" },
+  { "clue": "illige oodalu hoguttivi", "answer": "shaale" },
+];
+
+let current = 0;
+let score = 0;
+
+function showQuestion() {
+  if (current < questions.length) {
+    document.getElementById("clue").innerText = "Clue: " + questions[current].clue;
+    document.getElementById("userInput").value = "";
+    document.getElementById("feedback").innerText = "";
+    document.getElementById("scoreDisplay").innerText = `Score: ${score} / ${questions.length}`;
+  } else {
+    document.querySelector('.card').innerHTML = `
+      <h2>Well done!</h2>
+      <p>You completed the game.</p>
+      <p>Your final score: <strong>${score} / ${questions.length}</strong></p>
+      <button onclick="location.reload()">Play Again</button>
+    `;
+  }
+}
+
+function checkAnswer() {
+  const input = document.getElementById("userInput").value.trim().toLowerCase();
+  const feedback = document.getElementById("feedback");
+  if (input === questions[current].answer) {
+    feedback.innerText = "✔️ Correct!";
+    feedback.style.color = "green";
+    score++;
+  } else {
+    feedback.innerText = `❌ Incorrect. Correct answer: ${questions[current].answer}`;
+    feedback.style.color = "red";
+  }
+  document.getElementById("scoreDisplay").innerText = `Score: ${score} / ${questions.length}`;
+}
+
+function nextQuestion() {
+  current++;
+  showQuestion();
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>
